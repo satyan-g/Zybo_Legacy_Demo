@@ -1,0 +1,46 @@
+# Vivado generated files
+*.jou
+*.log
+*.str
+*.bit
+*.ltx
+*.xsa
+*.sysdef
+*.hwdef
+
+# Vivado project directories (we use non-project TCL flow)
+*.runs/
+*.srcs/
+*.sim/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.gen/
+.Xil/
+
+# Build output directory
+output/
+
+# Vivado artifacts
+clockInfo.txt
+
+# Copyrighted docs (link to originals instead)
+docs/*.pdf
+
+# Vitis workspace
+vitis_ws/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*.orig
