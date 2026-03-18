@@ -10,12 +10,13 @@ Demonstrates basic PWM generation with a triangle-wave duty cycle.
 ## Build and Run
 ```
 ./scripts/build_hw.sh 03_breathing_led
-./scripts/run_vivado.sh scripts/03_breathing_led/program.tcl
+./scripts/deploy.sh 03_breathing_led
 ```
 
 ## What to Expect
 - LED0 gradually brightens and dims in a continuous breathing pattern.
+- Switches SW[1:0] control speed, SW[3:2] control mode.
 - No serial output (no PS).
 
 ## Source
-- `src/03_breathing_led/breathing_led.v`
+- `src/03_breathing_led/hw/breathing_led.v`

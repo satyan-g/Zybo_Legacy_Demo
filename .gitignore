@@ -23,6 +23,8 @@ output/
 
 # Vivado artifacts
 clockInfo.txt
+NA/
+*.html
 
 # Copyrighted docs (link to originals instead)
 docs/*.pdf

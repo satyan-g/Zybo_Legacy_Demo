@@ -1,21 +1,22 @@
 # 01 — LED Blink (PL Only)
 
-All 4 LEDs blink at approximately 1 Hz using a 26-bit counter in the PL.
-No ARM core involvement — pure programmable logic.
+The simplest possible FPGA design. A 26-bit counter increments every clock
+cycle; bit 25 toggles at ~1.86 Hz (125 MHz / 2^26), driving all 4 LEDs.
+No block design, no ARM core, no software — just a counter and a clock.
+
+**Teaches:** Verilog basics, clock-to-output path, Vivado non-project flow.
 
 ## Hardware Setup
-- PL only: 125 MHz clock on pin L16, LEDs on M14/M15/G14/D18.
-- No block design or PS configuration required.
+- 125 MHz clock on pin L16, LEDs on M14/M15/G14/D18.
 
 ## Build and Run
 ```
 ./scripts/build_hw.sh 01_blink
-./scripts/run_vivado.sh scripts/01_blink/program.tcl
+./scripts/deploy.sh 01_blink
 ```
 
 ## What to Expect
-- All 4 LEDs blink together at ~1 Hz.
-- No serial output (no PS).
+- All 4 LEDs blink together at ~1 Hz. No serial output.
 
 ## Source
-- `src/01_blink/blink.v`
+- `src/01_blink/hw/blink.v`

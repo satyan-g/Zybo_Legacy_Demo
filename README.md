@@ -36,45 +36,46 @@ Everything is TCL-scripted. No GUI clicks.
 ## Quick Start
 
 ```bash
-# 1. Source Xilinx tools
-source $HOME/Xilinx/Vivado/2024.2/Vivado/2024.2/settings64.sh
-source $HOME/Xilinx/Vivado/2024.2/Vitis/2024.2/settings64.sh
-
-# 2. Build hardware (Vivado synthesis + implementation + bitstream)
+# 1. Build hardware (Vivado synthesis + implementation + bitstream)
 ./scripts/build_hw.sh 05_axi_gpio
 
-# 3. Build software (Vitis bare-metal app)
+# 2. Build software (Vitis bare-metal app)
 ./scripts/build_sw.sh 05_axi_gpio
 
-# 4. Open serial console
+# 3. Open serial console
 picocom -b 115200 /dev/ttyUSB1
 
-# 5. Deploy to board
+# 4. Deploy to board
 ./scripts/deploy.sh 05_axi_gpio
 ```
 
 For PL-only projects (01, 03, 04) that don't use the ARM core:
 ```bash
-./scripts/build_hw.sh 01_blink              # or: ./scripts/run_vivado.sh scripts/01_blink/build.tcl
-./scripts/run_vivado.sh scripts/01_blink/program.tcl
+./scripts/build_hw.sh 01_blink
+./scripts/run_vivado.sh src/01_blink/program.tcl
 ```
 
 ## File Structure
 
 ```
-├── src/           # Verilog source files
-├── constrs/       # Pin constraint files (.xdc)
-├── sw/            # Bare-metal C applications
-├── scripts/       # TCL build scripts + shell wrappers
-│   ├── build_hw.sh       # Build hardware:  ./scripts/build_hw.sh <project>
-│   ├── build_sw.sh       # Build software:  ./scripts/build_sw.sh <project>
-│   ├── deploy.sh         # Program + run:   ./scripts/deploy.sh <project>
-│   ├── env.sh            # Xilinx tool paths
-│   └── zybo_preset.tcl   # Zynq PS configuration preset
-├── docs/          # Hardware docs and build gotchas
-│   └── myhardware.md     # Critical Vitis 2024.2 findings
-├── output/        # Build artifacts (gitignored)
-└── CLAUDE.md      # AI assistant instructions
+├── src/
+│   └── <NN_project>/
+│       ├── hw/            # Verilog sources, constraints (.xdc), build.tcl
+│       ├── sw/            # Bare-metal C app, build.py
+│       ├── run.tcl        # XSCT deploy script (PS projects)
+│       └── README.md      # Project-specific notes
+├── src/common/
+│   └── zybo_master.xdc    # Master pin constraint reference
+├── scripts/               # Shell wrapper scripts
+│   ├── build_hw.sh        # Build hardware:  ./scripts/build_hw.sh <project>
+│   ├── build_sw.sh        # Build software:  ./scripts/build_sw.sh <project>
+│   ├── deploy.sh          # Program + run:   ./scripts/deploy.sh <project>
+│   ├── env.sh             # Xilinx tool paths
+│   └── zybo_preset.tcl    # Zynq PS configuration preset
+├── docs/                  # Hardware docs and build gotchas
+│   └── myhardware.md      # Critical Vitis 2024.2 findings
+├── output/                # Build artifacts (gitignored)
+└── CLAUDE.md              # AI assistant instructions
 ```
 
 ## Key Findings (Vitis 2024.2 + Original Zybo)
